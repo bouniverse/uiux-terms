@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI/UX 실무 용어집</title>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+<style>
+:root {
+  --primary: #CB7C5B;
+  --primary-container: #FAEEE7;
+  --on-primary-container: #4A1F0A;
+  --secondary-container: #F5E8DF;
+  --on-secondary-container: #3A1A08;
+  --surface: #FAFAFA;
+  --surface-card: #FFFFFF;
+  --on-surface: #111118;
+  --on-surface-2: #3A3A45;
+  --on-surface-3: #6B6B78;
+  --outline: #E2E0E8;
+  --outline-strong: #C8C4D0;
+  --c-nav:#1565C0;--c-nav-bg:#EEF4FF;
+  --c-action:#6A1B9A;--c-action-bg:#F5EDFF;
+  --c-state:#1B6B3A;--c-state-bg:#EDFAF3;
+  --c-content:#B45309;--c-content-bg:#FFF8ED;
+  --c-form:#B91C1C;--c-form-bg:#FFF1F1;
+  --c-ux:#0369A1;--c-ux-bg:#EFF8FF;
+  --c-plan:#92400E;--c-plan-bg:#FFFBEB;
+  --c-dev:#4527A0;--c-dev-bg:#F0EEFF;
+  --c-asset:#166534;--c-asset-bg:#F0FDF4;
+}
+[data-theme="dark"] {
+  --primary: #E8A882;
+  --primary-container: #3A1F0E;
+  --on-primary-container: #F5D4C0;
+  --secondary-container: #2E1A0E;
+  --on-secondary-container: #D4B09A;
+  --surface: #262624;
+  --surface-card: #30302E;
+  --on-surface: #C2C0B7;
+  --on-surface-2: #A8A69E;
+  --on-surface-3: #64645F;
+  --outline: #3D3D3A;
+  --outline-strong: #4A4A47;
+  --c-nav:#7EB3FF;--c-nav-bg:#1A2640;
+  --c-action:#D4A0FF;--c-action-bg:#2A1A3A;
+  --c-state:#6FCF97;--c-state-bg:#1A2E24;
+  --c-content:#FFB870;--c-content-bg:#2E2010;
+  --c-form:#FF9090;--c-form-bg:#2E1A1A;
+  --c-ux:#60C8F0;--c-ux-bg:#102030;
+  --c-plan:#FFD060;--c-plan-bg:#2E2408;
+  --c-dev:#B8A0FF;--c-dev-bg:#1E1830;
+  --c-asset:#80D080;--c-asset-bg:#102010;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Pretendard',sans-serif;background:var(--surface);color:var(--on-surface);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* TOP NAV */
+.topnav{height:60px;background:var(--surface-card);border-bottom:1px solid var(--outline);display:flex;align-items:center;padding:0 24px;gap:16px;position:fixed;top:0;left:0;right:0;z-index:200;}
+.nav-hamburger{display:none;width:36px;height:36px;border:none;background:none;cursor:pointer;border-radius:8px;align-items:center;justify-content:center;font-size:1rem;color:var(--on-surface-2);transition:background 0.15s;}
+.nav-hamburger:hover{background:var(--surface);}
+.nav-logo{font-size:0.95rem;font-weight:700;color:var(--on-surface);letter-spacing:-0.3px;white-space:nowrap;}
+.nav-logo span{color:var(--primary);}
+.nav-divider{width:1px;height:20px;background:var(--outline);margin:0 4px;}
+.nav-subtitle{font-size:0.78rem;color:var(--on-surface-3);font-weight:400;}
+.nav-search{margin-left:auto;display:flex;align-items:center;background:var(--surface);border:1px solid var(--outline);border-radius:10px;padding:0 14px;gap:8px;height:36px;width:260px;transition:all 0.2s;}
+.nav-search:focus-within{background:var(--surface-card);border-color:var(--primary);box-shadow:0 0 0 3px rgba(203,124,91,0.12);}
+.nav-search svg{flex-shrink:0;color:var(--on-surface-3);}
+.nav-search input{border:none;background:none;outline:none;font-family:'Pretendard',sans-serif;font-size:0.84rem;font-weight:400;color:var(--on-surface);width:100%;}
+.nav-search input::placeholder{color:var(--on-surface-3);}
+.theme-toggle{margin-left:8px;width:36px;height:36px;border:1px solid var(--outline);background:none;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--on-surface-2);transition:background 0.15s,color 0.15s;flex-shrink:0;}
+.theme-toggle:hover{background:var(--outline);}
+
+/* LAYOUT */
+.layout{display:flex;margin-top:60px;min-height:calc(100vh - 60px);}
+
+/* SIDEBAR */
+.sidebar{width:248px;flex-shrink:0;border-right:1px solid var(--outline);padding:20px 0 32px;position:fixed;top:60px;bottom:0;overflow-y:auto;background:var(--surface-card);z-index:100;transition:transform 0.25s cubic-bezier(0.2,0,0,1);}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--outline-strong);border-radius:4px;}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.24);z-index:99;}
+.sidebar-group{margin-bottom:4px;}
+.sidebar-group-label{padding:8px 20px 4px;font-size:0.68rem;font-weight:600;color:var(--on-surface-3);letter-spacing:0.8px;text-transform:uppercase;}
+.sidebar-item{display:flex;align-items:center;gap:8px;padding:8px 20px;font-size:0.82rem;font-weight:500;color:var(--on-surface-2);cursor:pointer;border:none;background:none;width:100%;text-align:left;border-radius:0;transition:all 0.15s;font-family:'Inter',sans-serif;position:relative;}
+.sidebar-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:0;background:var(--primary);border-radius:0 2px 2px 0;transition:height 0.2s;}
+.sidebar-item:hover{background:var(--surface);color:var(--on-surface);}
+.sidebar-item.active{color:var(--primary);background:var(--primary-container);font-weight:600;}
+.sidebar-item.active::before{height:60%;}
+.s-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:0.5;flex-shrink:0;}
+.sidebar-item.active .s-dot{opacity:1;}
+
+/* MAIN */
+.main{margin-left:248px;flex:1;display:flex;min-width:0;}
+.content{flex:1;padding:44px 52px;min-width:0;max-width:840px;}
+.right-toc{width:210px;flex-shrink:0;padding:44px 16px 44px 4px;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
+
+/* PAGE HEADER */
+.page-header{margin-bottom:36px;}
+.page-eyebrow{font-size:0.72rem;font-weight:600;color:var(--primary);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px;}
+.page-title{font-size:2rem;font-weight:700;color:var(--on-surface);letter-spacing:-0.8px;line-height:1.15;margin-bottom:12px;}
+.page-title span{color:var(--primary);}
+.page-desc{font-size:0.9rem;color:var(--on-surface-2);line-height:1.75;font-weight:400;}
+.page-divider{height:1px;background:var(--outline);margin:28px 0 32px;}
+
+/* INFO CARD */
+.info-card{background:var(--primary-container);border-radius:12px;padding:14px 18px;margin-bottom:40px;display:flex;gap:12px;align-items:flex-start;}
+.info-card-text{font-size:0.83rem;color:var(--on-primary-container);line-height:1.65;font-weight:500;}
+.info-card-text b{font-weight:700;}
+
+/* SECTION */
+.section{margin-bottom:52px;scroll-margin-top:80px;}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;padding-bottom:14px;border-bottom:1px solid var(--outline);}
+.section-title-text{font-size:1.05rem;font-weight:700;color:var(--on-surface);letter-spacing:-0.3px;}
+.section-count{font-size:0.7rem;font-weight:600;color:var(--on-surface-3);background:var(--surface);border:1px solid var(--outline);padding:2px 8px;border-radius:100px;}
+.section-desc{font-size:0.82rem;color:var(--on-surface-3);margin-bottom:16px;line-height:1.6;font-weight:400;}
+
+/* TERM CARD */
+.term-card{border:1px solid var(--outline);border-radius:10px;margin-bottom:6px;overflow:hidden;background:var(--surface-card);transition:border-color 0.15s,box-shadow 0.15s;}
+.term-card:hover{border-color:var(--outline-strong);box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.term-header{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;gap:12px;user-select:none;}
+.term-left{display:flex;align-items:baseline;gap:8px;flex:1;min-width:0;}
+.term-en{font-size:0.875rem;font-weight:600;color:var(--on-surface);letter-spacing:-0.1px;}
+.term-ko{font-size:0.76rem;font-weight:500;color:var(--on-surface-3);flex-shrink:0;}
+.term-chip{flex-shrink:0;font-size:0.67rem;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:0.2px;}
+.chev{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;color:var(--on-surface-3);font-size:0.6rem;}
+.chev.open{transform:rotate(180deg);background:var(--surface);color:var(--on-surface-2);}
+.term-body{display:none;border-top:1px solid var(--outline);}
+.term-body.open{display:block;}
+.term-body-inner{padding:16px 18px;background:var(--surface);}
+.term-desc{font-size:0.875rem;font-weight:500;color:var(--on-surface-2);line-height:1.8;margin-bottom:12px;}
+.term-prompt{background:#fff;border:1px solid var(--outline);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;}
+.prompt-label{font-size:0.68rem;font-weight:700;color:var(--primary);white-space:nowrap;margin-top:2px;letter-spacing:0.3px;}
+.prompt-text{font-size:0.78rem;font-weight:500;color:var(--on-surface-2);font-family:'JetBrains Mono',monospace;line-height:1.6;}
+
+/* RIGHT TOC */
+.toc-label{font-size:0.68rem;font-weight:600;color:var(--on-surface-3);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:10px;padding-left:10px;}
+.toc-item{display:block;font-size:0.78rem;font-weight:500;color:var(--on-surface-3);padding:5px 10px;cursor:pointer;border:none;background:none;text-align:left;width:100%;border-radius:6px;font-family:'Inter',sans-serif;transition:all 0.15s;border-left:2px solid transparent;}
+.toc-item:hover{color:var(--on-surface);background:var(--surface);}
+.toc-item.active{color:var(--primary);font-weight:600;border-left-color:var(--primary);background:var(--primary-container);}
+
+/* EMPTY */
+.empty{text-align:center;padding:72px 24px;color:var(--on-surface-3);}
+.empty-icon{font-size:1.5rem;margin-bottom:10px;opacity:0.5;}
+.empty-text{font-size:0.9rem;font-weight:500;}
+
+/* RESPONSIVE */
+@media(max-width:1279px){.right-toc{display:none;}.content{max-width:100%;padding:36px 40px;}}
+@media(max-width:1023px){
+  .main{margin-left:0;}
+  .sidebar{transform:translateX(-100%);box-shadow:none;width:272px;}
+  .sidebar.open{transform:translateX(0);box-shadow:2px 0 24px rgba(0,0,0,0.1);}
+  .sidebar-overlay.open{display:block;}
+  .nav-hamburger{display:flex;}
+  .nav-search{width:200px;}
+  .content{padding:28px 28px;}
+}
+@media(max-width:640px){
+  .topnav{padding:0 16px;}
+  .nav-divider,.nav-subtitle{display:none;}
+  .nav-search{width:150px;}
+  .content{padding:20px 16px;}
+  .page-title{font-size:1.6rem;}
+  .term-ko{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <button class="nav-hamburger" id="hamburgerBtn" onclick="toggleSidebar()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect y="2" width="16" height="1.5" rx="1" fill="currentColor"/><rect y="7.25" width="16" height="1.5" rx="1" fill="currentColor"/><rect y="12.5" width="16" height="1.5" rx="1" fill="currentColor"/></svg>
+  </button>
+  <div class="nav-logo">UI/UX <span>용어집</span></div>
+  <div class="nav-divider"></div>
+  <div class="nav-subtitle">실무 레퍼런스</div>
+  <div class="nav-search">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10 10L13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <input type="text" id="searchInput" placeholder="용어 검색...">
+  </div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="테마 전환">
+    <svg id="themeIcon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v1M8 14v1M1 8H2M14 8h1M3.05 3.05l.7.7M12.25 12.25l.7.7M3.05 12.95l.7-.7M12.25 3.75l.7-.7M8 5a3 3 0 100 6 3 3 0 000-6z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+  </button>
+</nav>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">UI 컴포넌트</div>
+      <button class="sidebar-item active" onclick="goTo('nav',this)"><span class="s-dot"></span>네비게이션</button>
+      <button class="sidebar-item" onclick="goTo('action',this)"><span class="s-dot"></span>액션 / 오버레이</button>
+      <button class="sidebar-item" onclick="goTo('state',this)"><span class="s-dot"></span>상태 표시</button>
+      <button class="sidebar-item" onclick="goTo('content',this)"><span class="s-dot"></span>콘텐츠</button>
+      <button class="sidebar-item" onclick="goTo('form',this)"><span class="s-dot"></span>입력 폼</button>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">UX / 기획</div>
+      <button class="sidebar-item" onclick="goTo('ux',this)"><span class="s-dot"></span>UX 개념</button>
+      <button class="sidebar-item" onclick="goTo('plan',this)"><span class="s-dot"></span>기획 산출물</button>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">협업 / 리소스</div>
+      <button class="sidebar-item" onclick="goTo('dev',this)"><span class="s-dot"></span>개발 협업</button>
+      <button class="sidebar-item" onclick="goTo('asset',this)"><span class="s-dot"></span>에셋 / 미디어</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="content">
+      <div class="page-header">
+        <div class="page-eyebrow">Reference</div>
+        <h1 class="page-title"><span>UI/UX</span> 실무 용어집</h1>
+        <p class="page-desc">디자이너·기획자·개발자가 함께 사용하는 실무 용어 모음입니다.<br>정확한 용어로 AI에게 지시할수록 더 정밀한 결과를 얻을 수 있습니다.</p>
+      </div>
+      <div class="page-divider"></div>
+      <div class="info-card">
+        <div class="info-card-text"><b>활용 팁</b> — 각 용어를 클릭하면 개념 설명과 AI 프롬프트 예시를 확인할 수 있습니다. 용어를 그대로 사용해 AI에게 지시하면 더 정확한 결과를 얻을 수 있습니다.</div>
+      </div>
+      <div id="termSections"></div>
+    </div>
+
+    <div class="right-toc">
+      <div class="toc-label">이 페이지</div>
+      <button class="toc-item active" onclick="goTo('nav',null,'toc')">네비게이션</button>
+      <button class="toc-item" onclick="goTo('action',null,'toc')">액션 / 오버레이</button>
+      <button class="toc-item" onclick="goTo('state',null,'toc')">상태 표시</button>
+      <button class="toc-item" onclick="goTo('content',null,'toc')">콘텐츠</button>
+      <button class="toc-item" onclick="goTo('form',null,'toc')">입력 폼</button>
+      <button class="toc-item" onclick="goTo('ux',null,'toc')">UX 개념</button>
+      <button class="toc-item" onclick="goTo('plan',null,'toc')">기획 산출물</button>
+      <button class="toc-item" onclick="goTo('dev',null,'toc')">개발 협업</button>
+      <button class="toc-item" onclick="goTo('asset',null,'toc')">에셋 / 미디어</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const data=[
+  {id:'nav',title:'네비게이션 계열',chip:'nav',chipText:'네비게이션',desc:'사용자가 서비스 내에서 이동하고 위치를 파악하도록 돕는 UI 요소',terms:[
+    {en:'GNB (Global Navigation Bar)',ko:'글로벌 내비게이션 바',desc:'서비스 전체 페이지에 공통으로 노출되는 상단 메뉴. 로고, 주요 메뉴, 로그인 버튼 등이 포함됨.',tip:'GNB에 마이페이지 아이콘과 알림 배지를 추가한 레이아웃을 디자인해줘'},
+    {en:'LNB (Local Navigation Bar)',ko:'로컬 내비게이션 바',desc:'특정 섹션이나 서비스 내부에서만 표시되는 하위 메뉴. GNB 아래 또는 좌측에 위치.',tip:'마이페이지 LNB 구조를 설계해줘'},
+    {en:'SNB (Side Navigation Bar)',ko:'사이드 내비게이션 바',desc:'화면 좌우 측면에 세로로 배치된 메뉴. 관리자 페이지나 대시보드에서 주로 사용.',tip:'어드민 대시보드용 SNB 컴포넌트를 만들어줘'},
+    {en:'Tab Bar',ko:'탭 바',desc:'탭을 전환하는 메뉴 요소. 모바일에서는 화면 하단에 고정 배치하는 Bottom Tab Bar가 일반적.',tip:'모바일 하단 탭 바 5개 항목 구조를 설계해줘'},
+    {en:'Breadcrumb',ko:'브레드크럼',desc:'현재 페이지의 위치 경로를 표시하는 요소. 홈 > 카테고리 > 상품명 형식.',tip:'이커머스 상품 상세 페이지 breadcrumb를 만들어줘'},
+    {en:'Anchor Navigation',ko:'앵커 내비게이션',desc:'페이지 내 특정 섹션으로 바로 이동하는 링크 메뉴. 긴 페이지의 목차 역할.',tip:'랜딩 페이지 우측 고정 앵커 네비게이션을 만들어줘'},
+    {en:'Sticky Navigation',ko:'스티키 내비게이션',desc:'스크롤을 내려도 화면 상단에 고정되어 항상 노출되는 네비게이션.',tip:'스크롤 시 배경색이 변하는 sticky navigation을 구현해줘'},
+    {en:'Hamburger Button',ko:'햄버거 버튼',desc:'모바일/태블릿에서 메뉴를 열고 닫기 위한 ☰ 형태의 버튼.',tip:'햄버거 버튼 클릭 시 드로어가 열리는 모바일 헤더를 만들어줘'},
+    {en:'Drawer / Side Panel',ko:'드로어 / 사이드 패널',desc:'햄버거 버튼 또는 특정 액션 시 화면 측면에서 슬라이드로 나타나는 메뉴 패널.',tip:'좌측에서 슬라이드로 열리는 모바일 drawer 메뉴를 디자인해줘'},
+    {en:'Pagination',ko:'페이지네이션',desc:'많은 콘텐츠를 여러 페이지로 나눠 번호 단위로 이동할 수 있게 하는 네비게이션.',tip:'이전/다음 버튼과 페이지 번호가 있는 pagination 컴포넌트를 만들어줘'},
+  ]},
+  {id:'action',title:'액션 / 오버레이 계열',chip:'action',chipText:'액션',desc:'사용자의 행동을 유도하거나, 기존 화면 위에 레이어로 표시되는 UI 요소',terms:[
+    {en:'Button',ko:'버튼',desc:'가장 기본적인 클릭 액션 요소. Primary, Secondary, Ghost, Danger 등 다양한 variant로 구성.',tip:'Primary / Secondary / Ghost 버튼 variant 3종 세트를 디자인해줘'},
+    {en:'Icon Button',ko:'아이콘 버튼',desc:'텍스트 없이 아이콘만으로 구성된 버튼. 툴바, 카드 액션 영역 등에 사용.',tip:'삭제, 편집, 공유 아이콘 버튼 세트를 만들어줘'},
+    {en:'CTA (Call To Action)',ko:'행동 유도 버튼',desc:'사용자의 특정 행동을 유도하는 버튼 또는 링크. 지금 시작하기, 무료 체험 등 전환을 목표로 함.',tip:'SaaS 랜딩 페이지용 CTA 버튼 문구 5개를 추천해줘'},
+    {en:'Modal / Dialog',ko:'모달 / 다이얼로그',desc:'기존 화면 위에 레이어로 뜨는 팝업 창. 확인, 경고, 정보 입력 등에 사용.',tip:'삭제 확인용 modal을 만들어줘. 제목, 설명, 취소/확인 버튼 포함.'},
+    {en:'Tooltip',ko:'툴팁',desc:'마우스 오버 시 나타나는 짧은 설명 말풍선. 아이콘이나 약어 설명에 주로 사용.',tip:'아이콘 버튼에 hover 시 나타나는 tooltip을 만들어줘'},
+    {en:'Popover',ko:'팝오버',desc:'클릭 시 해당 요소 근처에 뜨는 작은 정보 레이어. tooltip보다 더 많은 정보를 담을 수 있음.',tip:'프로필 아이콘 클릭 시 나타나는 popover 메뉴를 디자인해줘'},
+    {en:'Toast / Snackbar',ko:'토스트 / 스낵바',desc:'화면 하단 또는 상단에 잠깐 나타났다 사라지는 알림 메시지. 저장 완료, 오류 발생 등 피드백 목적.',tip:'성공/실패/정보 3가지 타입의 toast 컴포넌트를 만들어줘'},
+    {en:'Alert',ko:'얼럿',desc:'페이지 내에 인라인으로 표시되는 경고·주의·에러·성공 알림 박스.',tip:'info / warning / error / success 4종 alert 컴포넌트를 만들어줘'},
+    {en:'Bottom Sheet',ko:'바텀 시트',desc:'모바일 화면 하단에서 위로 슬라이드하여 나타나는 패널. 옵션 선택, 추가 정보 표시에 활용.',tip:'공유하기 옵션이 담긴 bottom sheet를 디자인해줘'},
+    {en:'Context Menu',ko:'컨텍스트 메뉴',desc:'우클릭 또는 특정 액션 시 나타나는 드롭다운 형태의 빠른 실행 메뉴.',tip:'파일 우클릭 시 나타나는 context menu를 만들어줘'},
+  ]},
+  {id:'state',title:'상태 표시 계열',chip:'state',chipText:'상태표시',desc:'현재 진행 상태, 위치, 로딩, 오류 등 시스템 상태를 사용자에게 알려주는 UI 요소',terms:[
+    {en:'Badge',ko:'배지',desc:'숫자, 상태, 알림 수 등을 표시하는 작은 라벨. 아이콘 위에 겹쳐 표시하거나 텍스트 옆에 붙임.',tip:'알림 아이콘에 숫자 badge를 붙인 컴포넌트를 만들어줘'},
+    {en:'Indicator',ko:'인디케이터',desc:'현재 상태나 위치를 시각적으로 보여주는 요소. 점, 선, 색상 변화 등 다양한 형태로 표현.',tip:'탭 메뉴 하단에 현재 선택된 탭을 표시하는 indicator를 만들어줘'},
+    {en:'Dot Indicator',ko:'닷 인디케이터',desc:'캐러셀이나 슬라이더의 현재 페이지 순서를 점(dot)으로 표시하는 요소.',tip:'이미지 슬라이더 하단에 dot indicator를 추가해줘'},
+    {en:'Bullet',ko:'불릿',desc:'목록 항목 앞에 붙는 점(•)이나 기호. 텍스트 목록의 시각적 구분자 역할.',tip:'체크박스형 bullet 리스트 컴포넌트를 만들어줘'},
+    {en:'Progress Bar',ko:'프로그레스 바',desc:'작업 진행률을 가로 막대로 나타내는 요소. 파일 업로드, 단계 진행 등에 사용.',tip:'파일 업로드 시 진행률을 보여주는 progress bar를 만들어줘'},
+    {en:'Stepper',ko:'스테퍼',desc:'여러 단계의 프로세스에서 현재 단계와 전체 진행 상황을 표시하는 요소.',tip:'회원가입 3단계 stepper 컴포넌트를 디자인해줘'},
+    {en:'Skeleton UI',ko:'스켈레톤 UI',desc:'콘텐츠 로딩 중 실제 콘텐츠 자리를 회색 블록으로 미리 보여주는 플레이스홀더.',tip:'카드 리스트 로딩 시 보여줄 skeleton UI를 만들어줘'},
+    {en:'Spinner / Loader',ko:'스피너 / 로더',desc:'데이터 처리 중임을 알리는 회전형 아이콘 또는 애니메이션.',tip:'버튼 내부에 들어가는 소형 spinner를 만들어줘'},
+    {en:'Empty State',ko:'빈 상태 화면',desc:'데이터가 없을 때 보여주는 화면. 안내 메시지, 일러스트, CTA 버튼을 포함하는 것이 일반적.',tip:'검색 결과가 없을 때 보여줄 empty state 화면을 디자인해줘'},
+    {en:'Error State',ko:'에러 상태 화면',desc:'오류 발생 시 사용자에게 상황을 알리고 해결 방향을 안내하는 화면.',tip:'네트워크 오류 error state 화면을 만들어줘. 재시도 버튼 포함.'},
+    {en:'Disabled State',ko:'비활성 상태',desc:'현재 사용 불가능한 요소의 시각적 표현. 보통 회색 처리, 클릭 불가로 표시.',tip:'조건 미충족 시 버튼이 disabled 상태로 바뀌는 예시를 만들어줘'},
+  ]},
+  {id:'content',title:'콘텐츠 계열',chip:'content',chipText:'콘텐츠',desc:'정보를 구성하고 표시하는 데 사용되는 콘텐츠 중심의 UI 요소',terms:[
+    {en:'Card',ko:'카드',desc:'관련 정보를 하나의 박스 형태로 묶어 보여주는 컴포넌트. 썸네일, 제목, 설명, 액션 버튼 등으로 구성.',tip:'이미지 + 제목 + 설명 + 버튼이 있는 콘텐츠 카드를 디자인해줘'},
+    {en:'Carousel / Slider',ko:'캐러셀 / 슬라이더',desc:'콘텐츠를 가로로 나열하고 좌우로 넘겨볼 수 있는 슬라이드 컴포넌트.',tip:'자동 재생이 되는 배너 carousel을 만들어줘. dot indicator 포함.'},
+    {en:'Accordion',ko:'아코디언',desc:'클릭 시 내용이 펼쳐지고 다시 클릭 시 접히는 컴포넌트. FAQ, 설정 메뉴 등에 활용.',tip:'FAQ 페이지용 accordion 컴포넌트를 만들어줘'},
+    {en:'Banner',ko:'배너',desc:'공지사항, 프로모션, 광고 등을 강조해 보여주는 띠 형태의 영역.',tip:'상단 공지 배너와 닫기 버튼이 있는 컴포넌트를 만들어줘'},
+    {en:'Chip / Tag',ko:'칩 / 태그',desc:'카테고리, 상태, 키워드 등을 나타내는 작은 라벨. 필터 선택, 해시태그 등에 활용.',tip:'선택/해제 가능한 필터 chip 컴포넌트를 만들어줘'},
+    {en:'Avatar',ko:'아바타',desc:'사용자 프로필 이미지를 원형으로 표시하는 요소. 이미지 없을 시 이니셜로 대체.',tip:'이미지가 없을 때 이니셜을 보여주는 avatar 컴포넌트를 만들어줘'},
+    {en:'Divider',ko:'디바이더',desc:'콘텐츠 영역을 구분하는 수평/수직 선.',tip:'섹션 사이에 라벨이 붙은 divider 컴포넌트를 만들어줘'},
+    {en:'List / List Item',ko:'리스트 / 리스트 아이템',desc:'반복되는 항목을 세로로 나열한 구조. 각 항목을 List Item이라 함.',tip:'아이콘 + 제목 + 서브텍스트로 구성된 list item 컴포넌트를 만들어줘'},
+    {en:'Table',ko:'테이블',desc:'행(row)과 열(column)로 구성된 데이터 표시 컴포넌트.',tip:'정렬과 체크박스 선택이 가능한 데이터 table을 만들어줘'},
+    {en:'Hero Section',ko:'히어로 섹션',desc:'랜딩 페이지 최상단에 위치하는 핵심 메시지 영역. 헤드라인, 서브 카피, CTA 버튼 포함.',tip:'SaaS 서비스 landing page hero section을 디자인해줘'},
+    {en:'Thumbnail',ko:'썸네일',desc:'콘텐츠를 대표하는 축소 이미지. 리스트, 카드, 비디오 미리보기 등에 사용.',tip:'동영상 thumbnail에 재생 아이콘 오버레이를 추가해줘'},
+    {en:'Lightbox',ko:'라이트박스',desc:'이미지 클릭 시 배경을 어둡게 하고 이미지를 크게 확대해 보여주는 오버레이 뷰어.',tip:'클릭 시 이미지를 확대하는 lightbox 컴포넌트를 만들어줘'},
+    {en:'Image Gallery',ko:'이미지 갤러리',desc:'다수의 이미지를 그리드 형태로 모아 보여주는 영역.',tip:'masonry 레이아웃의 image gallery를 만들어줘'},
+    {en:'Media Card',ko:'미디어 카드',desc:'이미지나 영상이 중심이 되는 카드 컴포넌트.',tip:'유튜브 스타일의 media card 컴포넌트를 디자인해줘'},
+  ]},
+  {id:'form',title:'입력 폼 계열',chip:'form',chipText:'입력 폼',desc:'사용자로부터 데이터를 입력받거나 선택을 받는 UI 요소',terms:[
+    {en:'Input Field',ko:'인풋 필드',desc:'한 줄의 텍스트를 입력받는 기본 입력창. 이름, 이메일, 비밀번호 등에 사용.',tip:'label + input + validation message가 포함된 input field를 만들어줘'},
+    {en:'Textarea',ko:'텍스트에리어',desc:'여러 줄의 텍스트를 입력받는 입력창. 댓글, 메모, 본문 작성 등에 사용.',tip:'글자 수 counter가 있는 textarea 컴포넌트를 만들어줘'},
+    {en:'Search Bar',ko:'서치 바',desc:'검색어를 입력하는 전용 입력창. 돋보기 아이콘, 초기화 버튼 등 포함.',tip:'자동완성 기능이 있는 search bar를 만들어줘'},
+    {en:'Dropdown / Select',ko:'드롭다운 / 셀렉트',desc:'옵션 목록에서 하나를 선택하는 UI. 클릭 시 목록이 펼쳐짐.',tip:'국가 선택용 dropdown 컴포넌트를 만들어줘'},
+    {en:'Checkbox',ko:'체크박스',desc:'다중 선택이 가능한 입력 요소. checked / unchecked / indeterminate 상태 존재.',tip:'전체 선택 기능이 있는 checkbox 리스트를 만들어줘'},
+    {en:'Radio Button',ko:'라디오 버튼',desc:'여러 옵션 중 하나만 선택 가능한 입력 요소.',tip:'결제 수단 선택용 radio button 그룹을 디자인해줘'},
+    {en:'Toggle / Switch',ko:'토글 / 스위치',desc:'on/off 두 가지 상태를 전환하는 요소. 설정 화면에서 자주 사용.',tip:'알림 설정 toggle switch 컴포넌트를 만들어줘'},
+    {en:'Date Picker',ko:'데이트 피커',desc:'날짜를 선택할 수 있는 달력 형태의 UI.',tip:'월/일/년 선택이 가능한 date picker를 만들어줘'},
+    {en:'Date Range Picker',ko:'기간 선택 UI',desc:'시작일과 종료일을 함께 선택하는 UI. 숙박, 항공 예약 등에 활용.',tip:'체크인/체크아웃 날짜 선택 date range picker를 만들어줘'},
+    {en:'Segmented Control',ko:'세그먼트 컨트롤',desc:'소수의 옵션을 버튼 형태로 나열하여 빠르게 전환하는 컨트롤.',tip:'일간/주간/월간 전환 segmented control을 만들어줘'},
+    {en:'Autocomplete',ko:'자동완성',desc:'입력값에 따라 연관 검색어나 옵션을 실시간으로 추천해주는 UI.',tip:'주소 입력 시 autocomplete 목록이 뜨는 컴포넌트를 만들어줘'},
+    {en:'Multi Select',ko:'멀티 셀렉트',desc:'목록에서 여러 항목을 동시에 선택할 수 있는 UI.',tip:'태그 형태로 선택 항목이 표시되는 multi select를 만들어줘'},
+    {en:'Range Slider',ko:'레인지 슬라이더',desc:'최솟값과 최댓값 사이 범위를 조절하는 슬라이더 UI.',tip:'가격 필터용 range slider 컴포넌트를 만들어줘'},
+    {en:'File Upload',ko:'파일 업로드',desc:'파일을 첨부하는 영역. 클릭 또는 드래그 앤 드롭 방식 지원.',tip:'드래그 앤 드롭이 가능한 file upload 영역을 만들어줘'},
+    {en:'Helper Text',ko:'헬퍼 텍스트',desc:'입력창 아래에 표시되는 보조 안내 문구. 입력 형식, 조건 설명 등.',tip:'비밀번호 입력창에 helper text와 validation message를 추가해줘'},
+    {en:'Number Stepper',ko:'넘버 스테퍼',desc:'버튼으로 숫자를 증가/감소시키는 입력 UI. 수량 선택 등에 사용.',tip:'최소 1, 최대 99 제한이 있는 number stepper를 만들어줘'},
+    {en:'Counter',ko:'카운터',desc:'입력된 글자 수 또는 선택 수량을 실시간으로 표시하는 요소.',tip:'최대 140자 제한 counter가 있는 textarea를 만들어줘'},
+  ]},
+  {id:'ux',title:'UX 개념',chip:'ux',chipText:'UX',desc:'사용자 경험 설계, 흐름 분석, 문제 정의에 사용되는 핵심 개념',terms:[
+    {en:'User Flow',ko:'유저 플로우',desc:'사용자가 특정 목표를 달성하기까지 거치는 화면과 행동의 흐름도.',tip:'상품 구매까지의 user flow를 단계별로 그려줘'},
+    {en:'Onboarding',ko:'온보딩',desc:'신규 사용자가 서비스를 처음 경험할 때 안내하는 흐름. 핵심 기능 소개, 튜토리얼, 환영 메시지 포함.',tip:'앱 첫 실행 시 보여줄 onboarding 3단계 플로우를 설계해줘'},
+    {en:'Pain Point',ko:'페인 포인트',desc:'사용자가 서비스 이용 중 불편하거나 막히는 지점. 이탈 원인 분석의 출발점.',tip:'쇼핑몰 결제 단계의 주요 pain point를 분석해줘'},
+    {en:'Persona',ko:'퍼소나',desc:'타겟 사용자를 대표하는 가상의 인물 프로필. 나이, 직업, 목표, 불만 등을 포함해 설계에 활용.',tip:'20대 직장인 여성을 타겟으로 한 앱의 persona를 만들어줘'},
+    {en:'Journey Map',ko:'저니 맵',desc:'사용자가 서비스를 처음 접하고 목표를 달성하기까지의 전 과정을 감정·행동·접점 기준으로 시각화.',tip:'신규 사용자의 가입부터 첫 구매까지 journey map을 작성해줘'},
+    {en:'Usability',ko:'사용성',desc:'사용자가 얼마나 쉽고 효율적으로 목표를 달성할 수 있는지의 척도.',tip:'이 화면의 usability 문제점을 분석하고 개선안을 제시해줘'},
+    {en:'Affordance',ko:'어포던스',desc:'디자인이 사용자에게 행동 가능성을 암시하는 성질. 버튼처럼 생기면 누를 수 있다고 인지하는 것.',tip:'이 버튼의 affordance를 높이는 방법을 알려줘'},
+    {en:'Feedback',ko:'피드백',desc:'사용자의 행동에 대해 시스템이 반응을 보여주는 것. 로딩, 진동, 색상 변화, 토스트 메시지 등.',tip:'버튼 클릭 후 적절한 feedback 방식 3가지를 제안해줘'},
+    {en:'Accessibility',ko:'접근성',desc:'장애 여부, 기기, 환경에 관계없이 모든 사용자가 사용할 수 있도록 설계하는 기준. WCAG 지침 준수.',tip:'이 컴포넌트의 accessibility 개선사항을 알려줘'},
+    {en:'Consistency',ko:'일관성',desc:'동일한 기능과 패턴이 서비스 전체에서 동일하게 동작하고 보이도록 유지하는 원칙.',tip:'버튼 스타일 consistency 가이드라인을 작성해줘'},
+    {en:'Interaction Pattern',ko:'인터랙션 패턴',desc:'자주 반복되는 사용자 인터랙션 방식. 무한 스크롤, 풀 투 리프레시, 스와이프 삭제 등.',tip:'모바일 앱에서 자주 쓰이는 interaction pattern 5가지를 알려줘'},
+  ]},
+  {id:'plan',title:'기획 산출물 / 문서',chip:'plan',chipText:'기획',desc:'서비스 기획, 구조 설계, 요구사항 정의를 위한 문서와 산출물',terms:[
+    {en:'Wireframe',ko:'와이어프레임',desc:'페이지 레이아웃을 색상·이미지 없이 뼈대만으로 표현한 초기 설계도.',tip:'로그인 페이지 wireframe을 텍스트로 설명해줘'},
+    {en:'Mockup',ko:'목업',desc:'와이어프레임에 실제 색상, 폰트, 이미지를 적용한 정적 시각 시안.',tip:'다크모드 대시보드 mockup 시안을 제안해줘'},
+    {en:'Prototype',ko:'프로토타입',desc:'클릭, 스와이프 등 실제 인터랙션이 가능한 시뮬레이션. Figma, Framer 등으로 제작.',tip:'온보딩 플로우 prototype 구조를 설계해줘'},
+    {en:'IA (Information Architecture)',ko:'정보 구조도',desc:'서비스 내 메뉴, 페이지, 콘텐츠를 계층적으로 정리한 구조도.',tip:'이커머스 앱의 IA를 카테고리별로 설계해줘'},
+    {en:'Sitemap',ko:'사이트맵',desc:'웹사이트 또는 앱의 전체 페이지 구조를 트리 형태로 정리한 문서.',tip:'기업 홈페이지의 sitemap을 작성해줘'},
+    {en:'PRD (Product Requirements Document)',ko:'제품 요구사항 문서',desc:'기능, 목표, 비즈니스 요구사항을 정의한 문서. 개발 착수 전 기준 문서.',tip:'소셜 로그인 기능의 PRD를 작성해줘'},
+    {en:'Feature Spec',ko:'기능 명세서',desc:'특정 기능의 동작 방식, 예외 처리, 조건 등을 상세히 기술한 문서.',tip:'알림 기능의 feature spec을 작성해줘. 예외 케이스 포함.'},
+    {en:'Use Case',ko:'유스케이스',desc:'특정 사용자가 특정 목적을 달성하기 위해 시스템과 상호작용하는 시나리오.',tip:'비로그인 사용자의 장바구니 use case를 작성해줘'},
+    {en:'Storyboard',ko:'스토리보드',desc:'사용자 시나리오를 장면별로 시각화한 것. 앱 흐름, 광고 영상 기획 등에 활용.',tip:'앱 튜토리얼 스토리보드 3장면을 기획해줘'},
+    {en:'KPI / Metric',ko:'핵심 지표',desc:'제품 성공을 측정하는 수치. DAU, 전환율, 이탈률, 리텐션, ARPU 등.',tip:'이커머스 앱 출시 후 측정해야 할 KPI 목록을 정리해줘'},
+    {en:'A/B Test',ko:'A/B 테스트',desc:'두 가지 버전을 실제 사용자에게 비교 노출하여 효과를 검증하는 실험.',tip:'CTA 버튼 색상 A/B 테스트 설계를 도와줘'},
+    {en:'MVP (Minimum Viable Product)',ko:'최소 기능 제품',desc:'핵심 가치만 담아 가장 빠르게 출시할 수 있는 제품 버전.',tip:'이 서비스의 MVP 범위를 정의해줘'},
+    {en:'Design System',ko:'디자인 시스템',desc:'색상, 타이포그래피, 컴포넌트, 사용 규칙 등을 통합한 설계 가이드라인.',tip:'스타트업용 미니멀 design system 구조를 설계해줘'},
+  ]},
+  {id:'dev',title:'개발 협업 용어',chip:'dev',chipText:'개발협업',desc:'디자인을 개발로 넘기는 과정에서 사용되는 협업 기준과 명세 관련 용어',terms:[
+    {en:'Handoff',ko:'핸드오프',desc:'디자이너가 개발자에게 디자인 파일과 명세를 전달하는 과정. Figma Dev Mode 활용이 일반적.',tip:'핸드오프 시 개발자에게 전달해야 할 스펙 체크리스트를 만들어줘'},
+    {en:'Spacing System',ko:'스페이싱 시스템',desc:'요소 간격을 일관성 있게 유지하기 위한 기준 체계. 보통 4px 또는 8px 단위 배수 사용.',tip:'8px 기반 spacing system을 정의해줘'},
+    {en:'Padding / Margin',ko:'패딩 / 마진',desc:'Padding은 요소 내부 여백, Margin은 요소 외부 여백.',tip:'카드 컴포넌트의 padding/margin 기준을 정의해줘'},
+    {en:'Grid / Layout',ko:'그리드 / 레이아웃',desc:'화면을 일정한 열(column)과 여백(gutter)으로 나눠 요소 배치를 정렬하는 기준 시스템.',tip:'12컬럼 그리드 기반 반응형 레이아웃을 설계해줘'},
+    {en:'Breakpoint',ko:'브레이크포인트',desc:'반응형 디자인에서 레이아웃이 변경되는 화면 너비 기준점. 모바일/태블릿/PC 등으로 구분.',tip:'모바일 퍼스트 기준 breakpoint 3단계를 정의해줘'},
+    {en:'Redline / Annotation',ko:'레드라인 / 어노테이션',desc:'디자인 파일에 수치, 간격, 색상 코드 등을 표기해 개발자가 정확히 구현하도록 안내.',tip:'이 컴포넌트에 필요한 annotation 항목을 정리해줘'},
+    {en:'Z-index / Layer',ko:'Z-index / 레이어',desc:'화면에서 요소들이 앞뒤로 쌓이는 순서. 모달이 배경보다 앞에 오는 것 등을 z-index로 제어.',tip:'모달, 토스트, 드롭다운의 z-index 우선순위 기준을 정해줘'},
+    {en:'Responsive Design',ko:'반응형 디자인',desc:'화면 크기에 따라 레이아웃, 폰트, 간격 등이 유동적으로 변하도록 설계하는 방식.',tip:'모바일/태블릿/데스크탑 반응형 레이아웃 기준을 설계해줘'},
+    {en:'Token',ko:'토큰',desc:'색상, 간격, 폰트 크기 등을 변수로 관리하는 값. 테마 변경, 다크모드 전환에 유리.',tip:'라이트/다크 모드 전환을 위한 token 구조를 만들어줘'},
+    {en:'Color Token',ko:'컬러 토큰',desc:'primary, surface, error 등 의미 단위로 정의한 색상 변수.',tip:'시맨틱 color token 세트를 만들어줘'},
+    {en:'Typography Scale',ko:'타이포그래피 스케일',desc:'폰트 크기와 위계를 체계적으로 정의한 기준. H1~H6, Body, Caption 등으로 구성.',tip:'모바일 앱용 typography scale을 8단계로 정의해줘'},
+    {en:'Component Variant',ko:'컴포넌트 배리언트',desc:'동일 컴포넌트의 크기, 색상, 상태별 버전. Figma의 Variants 기능으로 관리.',tip:'버튼의 size(S/M/L)와 type(primary/secondary) variant를 정의해줘'},
+    {en:'State',ko:'상태값',desc:'컴포넌트가 가질 수 있는 상태. default, hover, active, focus, disabled, loading 등.',tip:'버튼 컴포넌트의 전체 state 목록을 정리해줘'},
+    {en:'Asset Export',ko:'에셋 익스포트',desc:'디자인 파일에서 개발에 필요한 아이콘, 이미지 등을 파일로 추출하는 과정.',tip:'Figma에서 아이콘을 SVG로 export하는 기준을 정리해줘'},
+  ]},
+  {id:'asset',title:'에셋 / 미디어',chip:'asset',chipText:'에셋',desc:'UI를 구성하는 이미지, 아이콘, 그래픽, 폰트 등 리소스 파일',terms:[
+    {en:'Asset',ko:'에셋',desc:'디자인에 사용되는 모든 리소스 파일의 총칭. 아이콘, 이미지, 폰트, 애니메이션 등 포함.',tip:'이 앱에 필요한 에셋 목록을 카테고리별로 정리해줘'},
+    {en:'Icon',ko:'아이콘',desc:'기능이나 개념을 시각 기호로 표현한 작은 그래픽. 보통 SVG 형식으로 사용.',tip:'설정, 알림, 검색, 홈, 프로필 아이콘 세트 기준을 정의해줘'},
+    {en:'Favicon',ko:'파비콘',desc:'브라우저 탭, 북마크 등에 표시되는 웹사이트 대표 아이콘. 16x16, 32x32 등 소형 사이즈.',tip:'이 브랜드에 맞는 favicon 디자인 방향을 제안해줘'},
+    {en:'Illustration',ko:'일러스트레이션',desc:'설명이나 분위기 전달을 위한 그래픽 이미지. empty state, 온보딩, 에러 화면 등에 활용.',tip:'empty state 화면에 어울리는 illustration 스타일을 추천해줘'},
+    {en:'Hero Image',ko:'히어로 이미지',desc:'페이지 최상단 히어로 섹션에 사용되는 주요 비주얼 이미지.',tip:'B2B SaaS 랜딩 페이지에 어울리는 hero image 방향을 제안해줘'},
+    {en:'Banner Image',ko:'배너 이미지',desc:'프로모션, 공지, 광고 목적으로 제작된 배너 영역의 이미지.',tip:'앱 내 프로모션 banner image 사이즈 기준을 정리해줘'},
+    {en:'Thumbnail',ko:'썸네일',desc:'콘텐츠를 대표하는 축소 이미지. 비디오, 블로그, 카드 등에 사용.',tip:'유튜브 스타일 thumbnail 비율과 사이즈 기준을 알려줘'},
+    {en:'Lottie',ko:'로티',desc:'JSON 기반의 경량 벡터 애니메이션 파일 포맷. 로딩, 성공, 빈 상태 화면에 주로 활용.',tip:'버튼 클릭 성공 시 사용할 lottie 애니메이션 방향을 제안해줘'},
+    {en:'SVG Asset',ko:'SVG 에셋',desc:'벡터 기반의 아이콘, 그래픽 파일. 해상도 무관하게 선명하며 크기 변환에 자유로움.',tip:'아이콘을 SVG로 관리할 때의 네이밍 규칙을 정해줘'},
+    {en:'Raster Image',ko:'래스터 이미지',desc:'JPG, PNG, WebP 등 픽셀 기반 이미지. 사진, 배너 등에 사용되며 크기 변환 시 품질 저하.',tip:'웹 최적화를 위한 이미지 포맷과 해상도 기준을 정리해줘'},
+    {en:'Font Asset',ko:'폰트 에셋',desc:'웹폰트, 앱 폰트 등 글꼴 파일. woff2, ttf 등 형식으로 제공되며 로딩 최적화가 중요.',tip:'웹폰트 로딩 최적화 방법과 fallback 폰트 설정을 알려줘'},
+  ]},
+];
+
+const chipColors={nav:'--c-nav',action:'--c-action',state:'--c-state',content:'--c-content',form:'--c-form',ux:'--c-ux',plan:'--c-plan',dev:'--c-dev',asset:'--c-asset'};
+function chipStyle(c){return `background:var(${chipColors[c]}-bg);color:var(${chipColors[c]})`;}
+
+function render(q=''){
+  const ql=q.toLowerCase();
+  const container=document.getElementById('termSections');
+  container.innerHTML='';
+  data.forEach(sec=>{
+    const terms=ql?sec.terms.filter(t=>t.en.toLowerCase().includes(ql)||t.ko.includes(ql)||t.desc.includes(ql)):sec.terms;
+    if(ql&&!terms.length)return;
+    const el=document.createElement('div');
+    el.className='section';el.id='sec-'+sec.id;
+    el.innerHTML=`
+      <div class="section-head">
+        <span class="section-title-text">${sec.title}</span>
+        <span class="section-count">${terms.length}</span>
+      </div>
+      <p class="section-desc">${sec.desc}</p>
+      ${terms.map((t,i)=>`
+        <div class="term-card">
+          <div class="term-header" onclick="toggle('${sec.id}-${i}')">
+            <div class="term-left">
+              <span class="term-en">${t.en}</span>
+              <span class="term-ko">${t.ko}</span>
+            </div>
+            <span class="term-chip" style="${chipStyle(sec.chip)}">${sec.chipText}</span>
+            <span class="chev" id="chev-${sec.id}-${i}">▼</span>
+          </div>
+          <div class="term-body" id="body-${sec.id}-${i}">
+            <div class="term-body-inner">
+              <div class="term-desc">${t.desc}</div>
+              <div class="term-prompt">
+                <span class="prompt-label">AI 예시</span>
+                <span class="prompt-text">"${t.tip}"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('')}`;
+    container.appendChild(el);
+  });
+  if(!container.innerHTML)container.innerHTML=`<div class="empty"><div class="empty-icon">○</div><div class="empty-text">검색 결과가 없습니다</div></div>`;
+}
+
+function toggle(id){
+  document.getElementById('body-'+id).classList.toggle('open');
+  document.getElementById('chev-'+id).classList.toggle('open');
+}
+
+function goTo(id){
+  const el=document.getElementById('sec-'+id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.sidebar-item').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.toc-item').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(e=>{if(e.getAttribute('onclick')?.includes(`'${id}'`))e.classList.add('active');});
+  document.querySelectorAll('.toc-item').forEach(e=>{if(e.getAttribute('onclick')?.includes(`'${id}'`))e.classList.add('active');});
+  if(window.innerWidth<=1023)closeSidebar();
+}
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+document.getElementById('searchInput').addEventListener('input',e=>render(e.target.value));
+
+const moonSVG=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 10A6 6 0 016 2.5a.5.5 0 00-.6.6A6 6 0 1013.4 10.6a.5.5 0 00.1-.6z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+const sunSVG=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v1M8 14v1M1 8H2M14 8h1M3.05 3.05l.7.7M12.25 12.25l.7.7M3.05 12.95l.7-.7M12.25 3.75l.7-.7M8 5a3 3 0 100 6 3 3 0 000-6z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+let dark=false;
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme', dark?'dark':'');
+  document.getElementById('themeIcon').innerHTML= dark ? moonSVG : sunSVG;
+}
+render();
+</script>
+</body>
+</html>
